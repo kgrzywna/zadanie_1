@@ -5,7 +5,7 @@ from sympy import nextprime
 
 
 DOMINOES = ['/', '|', '\\']
-DOMINOES_SEQ = '/\|'
+DOMINOES_SEQ = r'/\|'
 
 
 def flip(char: str, turn: str):
@@ -19,10 +19,11 @@ def flip(char: str, turn: str):
     return "|", False
 
 
-def start(input_variable: str, type_: str, iterations: int):
+def domino_falling(input_variable: str, type_: str, iterations: int):
     if iterations < 0:
         raise ValueError
 
+    result = []
     if type_ == "forward":
         for i in range(0, iterations):
             flipped_str = ''
@@ -41,7 +42,7 @@ def start(input_variable: str, type_: str, iterations: int):
                 
                 index += 1
             input_variable = flipped_str
-            print(input_variable)
+            result.append(input_variable)
 
     if type_ == "reverse":
         for i in range(0, iterations):
@@ -57,7 +58,9 @@ def start(input_variable: str, type_: str, iterations: int):
                         flipped = True
 
             input_variable = "".join(str_array)
-            print(input_variable)
+            result.append(input_variable)
+
+    return result
 
 
 def valid_input(input_: str):
@@ -87,6 +90,8 @@ def manage_args():
 
     try:
         valid_input(input_variable)
-        start(input_variable, type_, iterations)
+        res = domino_falling(input_variable, type_, iterations)
+        for item in res:
+            print(item)
     except ValueError as e:
         print("Invalid input value")
