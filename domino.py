@@ -1,8 +1,6 @@
 import argparse
 from multiprocessing.sharedctypes import Value
 
-from sympy import nextprime
-
 
 DOMINOES = ['/', '|', '\\']
 DOMINOES_SEQ = r'/\|'
